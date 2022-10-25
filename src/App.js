@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./App.css";
-import Post from "./componetns/Post";
+import "./index.css";
+import {Post} from "./components/Post/Post";
 
 //!! Os trechos comentados fazem parte do exercício final !!
 // !!!!! não descomentar ou modificar até lá !!!!!
@@ -8,7 +8,6 @@ import Post from "./componetns/Post";
 export default function App() {
   const [textoNovoPost, setTextoNovoPost] = useState("")
   const [post, setPost] = useState({})
-  // const [comentario, setComentario] = useState("")
 
   const onChangeTextoNovoPost = (event) => {
     setTextoNovoPost(event.target.value);
@@ -27,36 +26,40 @@ export default function App() {
 
   const apagarPost = () => {
     // Apaga o post enviado
-    setPost()
+    setPost({})
   }
 
   const alterarCurtida = () => {
     // Altera o status de curtida do post
     const alterarCurtida = {
       ...post,
-      curtido: post.curtido
+      curtido: !post.curtido
     }
     setPost(alterarCurtida)
   }
 
   // Exercício final de debug. Descomentar só depois de finalizar o debug de post
-  /* function adicionaComentario() {
-    const addComentario ={
-     comentario: comentario
+  const [comentario, setComentario] = useState("")
+  const [textoComentario, setTextoComentario] = useState({})
+  
+  const onChangeComentario = (e) => {
+    setComentario(e.target.value)
+  }
+  
+  function adicionaComentario() {
+    const addComentario = {
+      comentario: comentario
     }
-    setComentario(addComentario)
-   }
+    setTextoComentario(addComentario)
+  }
 
-   const onChangeComentario = (e) => {
-     setComentario({e.target.valeu})
-   }
-*/
 
   return (
     <div className="App">
       <div>
         <input
           type="text"
+          placeholder="Digite o texto aqui"
           onChange={onChangeTextoNovoPost}
           value={textoNovoPost}
         />
@@ -65,10 +68,11 @@ export default function App() {
       <br />
       <Post
         post={post}
-        alteraCurtida={alterarCurtida}
+        alterarCurtida={alterarCurtida}
         apagarPost={apagarPost}
-        // onChangeComentarios={onChangeComentario}
-        // adicionaComentarios={adicionaComentario}
+        onChangeComentarios={onChangeComentario}
+        adicionaComentario={adicionaComentario}
+        textoComentario={textoComentario}
       />
     </div>
   );
