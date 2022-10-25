@@ -1,12 +1,13 @@
 import React from 'react'
-import { Comentario } from './styles'
+import { ComentarioStyle } from './styled'
+
 
 export default function Comentario(props) {
     return (
-        <Comentario>
-            <input placeholder="Adicionar comentario" />
-            <button onclick={props.adicionaComentario}>Comentar Post</button>
-            <p>{props.post.comentario}</p>
-        </Comentario>
+        <ComentarioStyle>
+            <input placeholder="Adicionar comentario" value={props.comentarioDoPost} onChange={props.onChangeComentarios}/>
+            <button onClick={props.adicionaComentario}>Comentar Post</button>
+            <p>{props.textoComentario.comentario}</p>
+        </ComentarioStyle>
     )
 }
